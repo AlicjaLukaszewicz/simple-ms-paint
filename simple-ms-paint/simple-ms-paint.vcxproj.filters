@@ -24,12 +24,24 @@
     <ClCompile Include="Interface\Interface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Canvas\Canvas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuBar\MenuBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Interface\Interface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas\Canvas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuBar\MenuBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -145,12 +145,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Button\Button.cpp" />
+    <ClCompile Include="Canvas\Canvas.cpp" />
     <ClCompile Include="Interface\Interface.cpp" />
+    <ClCompile Include="MenuBar\MenuBar.cpp" />
     <ClCompile Include="simple-ms-paint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button\Button.h" />
+    <ClInclude Include="Canvas\Canvas.h" />
     <ClInclude Include="Interface\Interface.h" />
+    <ClInclude Include="MenuBar\MenuBar.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

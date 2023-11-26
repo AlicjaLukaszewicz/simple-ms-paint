@@ -1,10 +1,13 @@
+#ifndef BUTTON_H
+#define BUTTON_H
+
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
 using namespace sf;
 using namespace std;
 
-enum class ButtonState
+enum ButtonState
 {
 	enabled, disabled
 };
@@ -38,3 +41,5 @@ public:
 	void drawTo(RenderWindow& window);
 	bool isMouseOver(Vector2f mousePosition);
 };
+
+#endif 
