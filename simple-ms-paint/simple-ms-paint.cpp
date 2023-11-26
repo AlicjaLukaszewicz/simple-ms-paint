@@ -12,11 +12,20 @@ int main() {
     Interface interface(window);
 
     while (window.isOpen()) {
-        sf::Event event;
+        Event event;
 
         while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
+            if (event.type == Event::Closed)
                 window.close();
+
+            if (event.type == Event::MouseMoved) {
+                Vector2f mousePosition = window.mapPixelToCoords(Mouse::getPosition(window));
+                interface.onMouseHover(window, mousePosition);
+            }
+            else if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
+                Vector2f mousePosition = window.mapPixelToCoords(Mouse::getPosition(window));
+                interface.onMouseClick(window, mousePosition);
+            }
         }
 
         window.clear(Color(205, 215, 230));

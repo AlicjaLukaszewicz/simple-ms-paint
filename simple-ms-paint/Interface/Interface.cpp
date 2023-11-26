@@ -66,3 +66,31 @@ void Interface::createCanvas(float width, float height, Vector2f position) {
     canvas.setPosition(position);
 }
 
+void Interface::onMouseHover(RenderWindow& window, Vector2f mousePosition) {
+    for (auto& button : buttons) {
+        if (button.isMouseOver(mousePosition)) {
+            button.setIsHovered(true);
+        }
+        else
+        {
+            button.setIsHovered(false);
+        }
+    }
+}
+
+void Interface::onMouseClick(RenderWindow& window, Vector2f mousePosition) {
+    for (auto& button : buttons) {
+        if (button.isMouseOver(mousePosition)) {
+            if (button.getState() == ButtonState::disabled) {
+                button.setState(ButtonState::enabled);
+                for (auto& otherButton : buttons) {
+                    if (&otherButton != &button) {
+                        otherButton.setState(ButtonState::disabled);
+                    }
+                }
+            }
+        }
+    }
+}
+
+

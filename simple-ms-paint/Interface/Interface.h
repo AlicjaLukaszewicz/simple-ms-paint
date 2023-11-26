@@ -23,4 +23,7 @@ public:
 
 	vector<Button> loadButtons();
 	Texture* loadTexture(const string& filename);
+
+	void onMouseHover(RenderWindow& window, Vector2f mousePosition);
+	void onMouseClick(RenderWindow& window, Vector2f mousePosition);
 };
