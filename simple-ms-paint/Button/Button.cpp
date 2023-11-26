@@ -1,8 +1,8 @@
 #include "Button.h"
 
 
-Button::Button(string name, float width, float height, Texture* texture, ButtonState state)
-    : name(name), width(width), height(height), state(state) {
+Button::Button(float width, float height, Texture* texture, ButtonState state, ButtonFunction function)
+    : width(width), height(height), state(state), function(function) {
     isHovered = false;
     Texture* smoothTexture = texture;
     smoothTexture->setSmooth(true);
@@ -40,6 +40,10 @@ float Button::getWidth() {
 
 float Button::getHeight() {
     return height;
+}
+
+ButtonFunction Button::getFunction() {
+    return function;
 }
 
 void Button::drawTo(RenderWindow& window) {

@@ -61,3 +61,11 @@ bool MenuBar::onMouseClick(const sf::Vector2f& mousePosition) {
 
     return anyButtonClicked;
 }
+
+Button MenuBar::getEnabledButton()
+{
+    for (auto& button : buttons) {
+        if (button.getState() == ButtonState::enabled)
+            return button;
+    }
+}

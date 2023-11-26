@@ -13,4 +13,6 @@ public:
     void drawTo(sf::RenderWindow& window);
     bool onMouseHover(const sf::Vector2f& mousePosition);
     bool onMouseClick(const sf::Vector2f& mousePosition);
+
+    Button getEnabledButton();
 };

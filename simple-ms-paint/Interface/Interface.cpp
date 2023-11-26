@@ -12,10 +12,12 @@ vector<Button> Interface::loadButtons()
     const float buttonSize = 50;
     vector<Button> buttons;
 
-    buttons.emplace_back("Pencil", buttonSize, buttonSize, loadTexture("pencil.png"), ButtonState::enabled);
-    buttons.emplace_back("Bucket", buttonSize, buttonSize, loadTexture("paint-bucket.png"), ButtonState::disabled);
-    buttons.emplace_back("Eraser", buttonSize, buttonSize, loadTexture("eraser.png"), ButtonState::disabled);
-    buttons.emplace_back("ColorPicker", buttonSize, buttonSize, loadTexture("pipette.png"), ButtonState::disabled);
+    buttons.emplace_back(buttonSize, buttonSize, loadTexture("pencil.png"), ButtonState::enabled, ButtonFunction::pencil);
+    buttons.emplace_back(buttonSize, buttonSize, loadTexture("paint-bucket.png"), ButtonState::disabled, ButtonFunction::bucket);
+    buttons.emplace_back(buttonSize, buttonSize, loadTexture("eraser.png"), ButtonState::disabled, 
+        ButtonFunction::eraser);
+    buttons.emplace_back(buttonSize, buttonSize, loadTexture("pipette.png"), ButtonState::disabled,
+        ButtonFunction::colorpicker);
 
     return buttons;
 }
@@ -40,4 +42,9 @@ void Interface::onMouseHover(RenderWindow& window, Vector2f mousePosition) {
 
 void Interface::onMouseClick(RenderWindow& window, Vector2f mousePosition) {
     menuBar.onMouseClick(mousePosition);
+}
+
+void Interface::onMouseHold(RenderWindow& window, Vector2f mousePosition) {
+    Button enabledButton = menuBar.getEnabledButton();
+    canvas.onMouseHold(mousePosition, enabledButton);
 }
