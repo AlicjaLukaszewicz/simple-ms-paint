@@ -24,10 +24,19 @@
     <ClCompile Include="Interface\Interface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Canvas\Canvas.cpp">
+    <ClCompile Include="Interface\Canvas\Canvas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MenuBar\MenuBar.cpp">
+    <ClCompile Include="Interface\MenuBar\MenuBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface\MenuBar\Sections\MenuSection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface\MenuBar\Sections\ColorSection\ColorSection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface\MenuBar\Sections\ToolSection\ToolSection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,11 +47,37 @@
     <ClInclude Include="Interface\Interface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Canvas\Canvas.h">
+    <ClInclude Include="MenuBar\Sections\MenuSection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MenuBar\MenuBar.h">
+    <ClInclude Include="Interface\Canvas\Canvas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Interface\MenuBar\MenuBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\MenuBar\Sections\MenuSection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\MenuBar\Sections\ColorSection\ColorSection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\MenuBar\Sections\ToolSection\ToolSection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\eraser.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\paint-bucket.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\pencil.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\pipette.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
