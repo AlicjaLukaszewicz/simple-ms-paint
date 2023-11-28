@@ -39,6 +39,9 @@
     <ClCompile Include="Interface\MenuBar\Sections\ToolSection\ToolSection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Paint\Paint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button\Button.h">
@@ -63,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Interface\MenuBar\Sections\ToolSection\ToolSection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Paint\Paint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
