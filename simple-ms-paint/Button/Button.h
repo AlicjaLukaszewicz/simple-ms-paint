@@ -7,45 +7,79 @@
 using namespace sf;
 using namespace std;
 
+enum class ButtonClass {
+	tool, color, none
+};
+
 enum class ButtonState
 {
 	enabled, disabled
 };
 
-enum class ButtonFunction {
-	pencil, bucket, eraser, colorpicker
+enum class ToolButtonType {
+	pencil, bucket, eraser, colorpicker,
+};
+
+enum class ColorButtonType {
+	red,
+	yellow,
+	green,
+	blue,
+	black
 };
 
 class Button {
-private:
+protected:
 	RectangleShape button;
 	RectangleShape buttonTexture;
 
-	float width;
-	float height;
+	float size;
 	Vector2f position;
 
 	Color color;
 	ButtonState state;
-	ButtonFunction function;
 	bool isHovered;
 
 public:
 	Button();
-	Button(float width, float height, Texture* texture, ButtonState state, ButtonFunction function);
+	Button(float size, Texture* texture, ButtonState state);
+
 	void setPosition(Vector2f position);
 	void setState(ButtonState state);
 
 	void setIsHovered(bool isHovered);
 	bool getIsHovered() const;
 
-	float getWidth();
-	float getHeight();
+	float getSize();
 	ButtonState getState();
-	ButtonFunction getFunction();
 
 	void drawTo(RenderWindow& window);
 	bool isMouseOver(Vector2f mousePosition);
+
+	virtual ButtonClass getButtonClass();
 };
 
-#endif 
+class ToolButton : public Button {
+private:
+	ToolButtonType type;
+	ButtonClass getButtonClass();
+
+public:
+	ToolButton();
+	ToolButton(float size, Texture* texture, ButtonState state, ToolButtonType type);
+
+	ToolButtonType getType();
+};
+
+class ColorButton : public Button {
+private:
+	ColorButtonType type;
+	ButtonClass getButtonClass();
+
+public:
+	ColorButton();
+	ColorButton(float size, Texture* texture, ButtonState state, ColorButtonType type);
+	Color getColor();
+};
+
+#endif

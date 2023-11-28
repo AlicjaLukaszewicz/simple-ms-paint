@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../Button/Button.h"
+#include "../../Button/Button.h"
 
 using namespace sf;
 
@@ -24,7 +24,6 @@ public:
 	Canvas(float width, float height, Vector2f position, float padding);
 
 	void drawTo(RenderWindow& window);
-	void onMouseHold(Vector2f mousePosition, Button enabledButton);
-	void onMouseClick(Vector2f mousePosition, Button enabledButton);
+	void onMouseHold(Vector2f mousePosition, vector<Button*> enabledButtons);
+	//void onMouseClick(Vector2f mousePosition, vector<Button*> enabledButtons);
 };
-
