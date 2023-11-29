@@ -15,6 +15,7 @@ protected:
 
 public:
 	MenuSection(float width, float height, Vector2f position, vector<Button*> buttons);
+	~MenuSection();
 
 	Vector2f getSize();
 	vector<Button*> getButtons();
@@ -25,7 +26,7 @@ public:
 
 	Texture* loadTexture(const string& filename);
 
+	virtual void positionButtons();
 	virtual void drawTo(RenderWindow& window);
 	virtual void onMouseHover(const Vector2f& mousePosition);
-	// virtual bool onMouseClick(const Vector2f& mousePosition);
 };
