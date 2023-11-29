@@ -7,19 +7,20 @@ using namespace sf;
 
 class Paint {
 private:
-    RenderWindow window;
-    Interface* interface;
-    bool isMouseDown;
+	RenderWindow window;
+	Interface* interface;
+	bool isMouseDown;
 
 public:
-    Paint();
-    void run();
+	Paint();
+	~Paint();
 
-    void processEvents(bool& isMouseDown);
-    void handleMouseMoved(const Event& event, bool& isMouseDown);
-    void handleMouseButtonPressed(const Event& event, bool& isMouseDown);
-    void handleMouseButtonReleased(const Event& event, bool& isMouseDown);
+	void run();
 
-    void render();
+	void processEvents(bool& isMouseDown);
+	void handleMouseMoved(const Event& event, bool& isMouseDown);
+	void handleMouseButtonPressed(const Event& event, bool& isMouseDown);
+	void handleMouseButtonReleased(const Event& event, bool& isMouseDown);
+
+	void render();
 };
-

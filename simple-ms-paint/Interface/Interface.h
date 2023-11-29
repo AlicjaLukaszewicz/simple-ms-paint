@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-#include "MenuBar/MenuBar.h"
+#include "Menu/Menu.h"
 #include "Canvas/Canvas.h"
 
 using namespace sf;
@@ -11,11 +11,12 @@ using namespace std;
 
 class Interface {
 private:
-	MenuBar menuBar;
-	Canvas canvas;
+	Menu* menu;
+	Canvas* canvas;
 
 public:
 	Interface(RenderWindow& window);
+	~Interface();
 
 	void draw(RenderWindow& window);
 

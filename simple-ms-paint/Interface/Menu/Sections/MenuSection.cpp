@@ -8,6 +8,13 @@ MenuSection::MenuSection(float width, float height, Vector2f position, vector<Bu
 	section.setPosition(position);
 }
 
+MenuSection::~MenuSection()
+{
+	for (Button* button : buttons) {
+		delete button;
+	}
+}
+
 Vector2f MenuSection::getSize()
 {
 	return section.getSize();
@@ -43,6 +50,9 @@ Texture* MenuSection::loadTexture(const string& filename) {
 }
 
 void MenuSection::onMouseHover(const Vector2f& mousePosition) {
+}
+
+void MenuSection::positionButtons() {
 }
 
 void MenuSection::drawTo(RenderWindow& window) {

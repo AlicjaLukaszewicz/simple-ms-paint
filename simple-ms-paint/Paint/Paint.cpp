@@ -6,6 +6,11 @@ Paint::Paint() : window(VideoMode(800, 600), "Paint Clone", Style::Close | Style
 	isMouseDown = false;
 }
 
+Paint::~Paint()
+{
+	delete interface;
+}
+
 void Paint::run() {
 	while (window.isOpen()) {
 		processEvents(isMouseDown);

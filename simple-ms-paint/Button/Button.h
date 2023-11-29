@@ -11,8 +11,7 @@ enum class ButtonClass {
 	tool, color, none
 };
 
-enum class ButtonState
-{
+enum class ButtonState {
 	enabled, disabled
 };
 
@@ -44,42 +43,16 @@ public:
 	Button();
 	Button(float size, Texture* texture, ButtonState state);
 
-	void setPosition(Vector2f position);
 	void setState(ButtonState state);
-
 	void setIsHovered(bool isHovered);
-	bool getIsHovered() const;
+	void setPosition(Vector2f position);
 
-	float getSize();
-	ButtonState getState();
+	float getSize() const;
+	bool getIsHovered() const;
+	ButtonState getState() const;
+	virtual ButtonClass getButtonClass() const = 0;
 
 	void drawTo(RenderWindow& window);
 	bool isMouseOver(Vector2f mousePosition);
-
-	virtual ButtonClass getButtonClass();
 };
-
-class ToolButton : public Button {
-private:
-	ToolButtonType type;
-	ButtonClass getButtonClass();
-
-public:
-	ToolButton();
-	ToolButton(float size, Texture* texture, ButtonState state, ToolButtonType type);
-
-	ToolButtonType getType();
-};
-
-class ColorButton : public Button {
-private:
-	ColorButtonType type;
-	ButtonClass getButtonClass();
-
-public:
-	ColorButton();
-	ColorButton(float size, Texture* texture, ButtonState state, ColorButtonType type);
-	Color getColor();
-};
-
 #endif

@@ -10,13 +10,12 @@ using namespace sf;
 using namespace std;
 
 class ToolSection : public MenuSection {
+private:
+	void loadTools();
+
 public:
 	ToolSection(float width, float height, Vector2f position);
 
-	void loadTools();
-	void positionButtons(float buttonSize);
-
-	void drawTo(RenderWindow& window);
-	void onMouseHover(const Vector2f& mousePosition);
-	// bool onMouseClick(const Vector2f& mousePosition);
+	void positionButtons() override;
+	void drawTo(RenderWindow& window) override;
 };
