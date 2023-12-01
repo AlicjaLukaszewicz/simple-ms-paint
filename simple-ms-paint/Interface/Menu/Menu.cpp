@@ -36,29 +36,22 @@ void Menu::drawTo(RenderWindow& window) {
 
 void Menu::onMouseHover(const Vector2f& mousePosition) {
 	for (const auto& section : sections) {
-		handleButtonHover(section->getButtons(), mousePosition);
-	}
-}
-
-void Menu::onMouseClick(const Vector2f& mousePosition) {
-	for (auto& section : sections) {
-		handleButtonClick(section->getButtons(), mousePosition);
-	}
-}
-
-void Menu::handleButtonClick(const vector<Button*>& buttons, const Vector2f& mousePosition) {
-	for (auto& button : buttons) {
-		if (button->isMouseOver(mousePosition) && button->getState() == ButtonState::disabled) {
-			button->setState(ButtonState::enabled);
-			setOtherButtonsToDisabled(buttons, button);
+		if (isMouseWithinSectionBounds(section, mousePosition)) {
+			section->onMouseHover(mousePosition);
 		}
 	}
 }
 
-void Menu::handleButtonHover(const vector<Button*>& buttons, const Vector2f& mousePosition) {
-	for (auto& button : buttons) {
-		button->setIsHovered(button->isMouseOver(mousePosition));
+void Menu::onMouseClick(const Vector2f& mousePosition) {
+	for (const auto& section : sections) {
+		if (isMouseWithinSectionBounds(section, mousePosition)) {
+			section->onMouseClick(mousePosition);
+		}
 	}
+}
+
+bool Menu::isMouseWithinSectionBounds(const MenuSection* section, const Vector2f& mousePosition) const {
+	return section->getSection().getGlobalBounds().contains(mousePosition);
 }
 
 vector<Button*> Menu::getEnabledButtons() const {
@@ -73,12 +66,4 @@ vector<Button*> Menu::getEnabledButtons() const {
 	}
 
 	return enabledButtons;
-}
-
-void Menu::setOtherButtonsToDisabled(const vector<Button*> buttons, const Button* clickedButton) {
-	for (const auto& button : buttons) {
-		if (button != clickedButton) {
-			button->setState(ButtonState::disabled);
-		}
-	}
 }

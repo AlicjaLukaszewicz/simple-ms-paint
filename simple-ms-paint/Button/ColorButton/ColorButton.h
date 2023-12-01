@@ -19,7 +19,8 @@ private:
 public:
 	ColorButton();
 	ColorButton(float size, ButtonState state, ColorButtonType type);
-	Color getColor();
+	ColorButtonType getColorButtonType() const;
+	Color getColor() const;
 
 	void drawTo(RenderWindow& window) override;
 };

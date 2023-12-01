@@ -62,3 +62,8 @@ bool Button::isMouseOver(Vector2f mousePosition) {
 ButtonState Button::getState() const {
 	return state;
 }
+
+RectangleShape Button::getButtonShape() const
+{
+	return button;
+}

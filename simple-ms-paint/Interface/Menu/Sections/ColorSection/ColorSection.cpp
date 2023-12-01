@@ -3,9 +3,11 @@
 #include "../../../../Button/ColorButton/ColorButton.h"
 
 const int BUTTON_SIZE = 20;
+const int NUMBER_OF_ROWS = 2;
 
 ColorSection::ColorSection(float width, float height, Vector2f position)
 	: MenuSection(width, height, position, {}) {
+	currentColorDisplay = new CurrentColorDisplay();
 	loadColors();
 }
 
@@ -38,51 +40,85 @@ void ColorSection::loadColors() {
 }
 
 void ColorSection::positionButtons() {
-	size_t numButtons = buttons.size();
-	size_t buttonsPerRow = numButtons / 2;
+	int numButtons = buttons.size();
+	int buttonsPerRow = numButtons / NUMBER_OF_ROWS;
 
-	float horizontalSpacing = calculateHorizontalSpacing(numButtons, buttonsPerRow);
+	// Calculate vertical spacing
 	float verticalSpacing = calculateVerticalSpacing();
 
-	Vector2f buttonPosition = calculateInitialButtonPosition(horizontalSpacing, verticalSpacing);
+	float currentColorDisplaySize = verticalSpacing + NUMBER_OF_ROWS * BUTTON_SIZE;
+	currentColorDisplay->setSize(currentColorDisplaySize);
 
-	for (size_t i = 0; i < numButtons; ++i) {
-		auto& button = buttons[i];
+	float currectColorDisplayY = section.getPosition().y + (section.getSize().y - currentColorDisplaySize) / 2;
 
-		if (isSecondRow(i, buttonsPerRow)) {
-			adjustPositionForSecondRow(buttonPosition, i, horizontalSpacing, verticalSpacing, buttonsPerRow);
+	// Calculate horizontal spacing
+	float horizontalSpacing = calculateHorizontalSpacing(currentColorDisplaySize, buttonsPerRow);
+
+	float currentColorDisplayX = section.getPosition().x + horizontalSpacing;
+	currentColorDisplay->setPosition({ currentColorDisplayX, currectColorDisplayY });
+
+	// Setup buttons position
+	float startButtonX = section.getPosition().x + 2 * horizontalSpacing + currentColorDisplaySize;
+	float startButtonY = section.getPosition().y + verticalSpacing;
+	float buttonTopX = startButtonX;
+	float buttonBottomX = startButtonX;
+	float buttonTopY = startButtonY;
+	float buttonBottomY = startButtonY + verticalSpacing + BUTTON_SIZE;
+
+	for (int i = 0; i < numButtons; i++)
+	{
+		if (i < buttonsPerRow) {
+			buttonTopX += (verticalSpacing + BUTTON_SIZE);
+			buttons[i]->setPosition({ buttonTopX, buttonTopY });
 		}
-
-		button->setPosition(buttonPosition);
-		buttonPosition.x += BUTTON_SIZE + horizontalSpacing;
+		else
+		{
+			buttonBottomX += (verticalSpacing + BUTTON_SIZE);
+			buttons[i]->setPosition({ buttonBottomX, buttonBottomY });
+		}
 	}
 }
 
-float ColorSection::calculateHorizontalSpacing(size_t numButtons, size_t buttonsPerRow) const {
-	return (section.getSize().x - BUTTON_SIZE * buttonsPerRow) / (buttonsPerRow + 1);
+float ColorSection::calculateVerticalSpacing() {
+	return (section.getSize().y - NUMBER_OF_ROWS * BUTTON_SIZE) / (NUMBER_OF_ROWS + 1);
 }
 
-float ColorSection::calculateVerticalSpacing() const {
-	return (section.getSize().y - BUTTON_SIZE * 2) / 3;
-}
-
-Vector2f ColorSection::calculateInitialButtonPosition(float horizontalSpacing, float verticalSpacing) const {
-	return Vector2f(section.getPosition().x + horizontalSpacing, verticalSpacing);
-}
-
-bool ColorSection::isSecondRow(size_t index, size_t buttonsPerRow) const {
-	return index >= buttonsPerRow;
-}
-
-void ColorSection::adjustPositionForSecondRow(Vector2f& buttonPosition, size_t index, float horizontalSpacing, float verticalSpacing, size_t buttonsPerRow) const {
-	buttonPosition.x = section.getPosition().x + horizontalSpacing + (index - buttonsPerRow) * (BUTTON_SIZE + horizontalSpacing);
-	buttonPosition.y = BUTTON_SIZE + 2 * verticalSpacing;
+float ColorSection::calculateHorizontalSpacing(float currentColorDisplaySize, int buttonsPerRow) {
+	return (section.getSize().x - currentColorDisplaySize - buttonsPerRow * BUTTON_SIZE) / (buttonsPerRow + 2);
 }
 
 void ColorSection::drawTo(RenderWindow& window) {
 	window.draw(section);
+	currentColorDisplay->drawTo(window);
 
 	for (auto& button : buttons) {
 		button->drawTo(window);
 	}
+}
+
+void ColorSection::onMouseClick(const Vector2f& mousePosition)
+{
+	Color color;
+	for (auto& button : buttons) {
+		if (button->getButtonShape().getGlobalBounds().contains(mousePosition)) {
+			button->setState(ButtonState::enabled);
+			setOtherButtonsToDisabled(button);
+			ColorButton* colorButton = dynamic_cast<ColorButton*>(button);
+			color = colorButton->getColor();
+		}
+	}
+	currentColorDisplay->setColor(color);
+}
+
+Color ColorSection::getPickedColor() const {
+	for (auto& button : buttons) {
+		if (button->getState() == ButtonState::enabled) {
+			ColorButton* colorButton = dynamic_cast<ColorButton*>(button);
+			if (colorButton) {
+				return colorButton->getColor();
+			}
+		}
+	}
+
+	return Color::White;
 }

@@ -5,24 +5,26 @@
 
 #include "../../../../Button/Button.h"
 #include "../MenuSection.h"
+#include "CurrentColorDisplay/CurrentColorDisplay.h"
 
 using namespace sf;
 using namespace std;
 
 class ColorSection : public MenuSection {
 private:
+	CurrentColorDisplay* currentColorDisplay;
+
 	void loadColors();
 
-	float calculateHorizontalSpacing(size_t numButtons, size_t buttonsPerRow) const;
-	float calculateVerticalSpacing() const;
-	Vector2f calculateInitialButtonPosition(float horizontalSpacing, float verticalSpacing) const;
-
-	bool isSecondRow(size_t index, size_t buttonsPerRow) const;
-	void adjustPositionForSecondRow(Vector2f& buttonPosition, size_t index, float horizontalSpacing, float verticalSpacing, size_t buttonsPerRow) const;
-
+	float calculateVerticalSpacing();
+	float calculateHorizontalSpacing(float currentColorDisplaySize, int buttonsPerRow);
 public:
 	ColorSection(float width, float height, Vector2f position);
 
+	Color getPickedColor() const;
+
 	void positionButtons() override;
 	void drawTo(RenderWindow& window) override;
+
+	void onMouseClick(const Vector2f& mousePosition) override;
 };

@@ -154,6 +154,7 @@
     <ClCompile Include="Interface\Interface.cpp" />
     <ClCompile Include="Interface\Menu\Sections\ToolSection\ToolSection.cpp" />
     <ClCompile Include="Paint\Paint.cpp" />
+    <ClCompile Include="Interface\Menu\Sections\ColorSection\CurrentColorDisplay\CurrentColorDisplay.cpp" />
     <ClCompile Include="simple-ms-paint.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="Interface\Menu\Sections\ToolSection\ToolSection.h" />
     <ClInclude Include="MenuBar\Sections\MenuSection.h" />
     <ClInclude Include="Paint\Paint.h" />
+    <ClInclude Include="Interface\Menu\Sections\ColorSection\CurrentColorDisplay\CurrentColorDisplay.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\eraser.png" />

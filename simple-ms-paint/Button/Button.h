@@ -38,6 +38,7 @@ public:
 	float getSize() const;
 	bool getIsHovered() const;
 	ButtonState getState() const;
+	RectangleShape getButtonShape() const;
 	virtual ButtonClass getButtonClass() const = 0;
 
 	virtual void drawTo(RenderWindow& window);

@@ -5,6 +5,11 @@ ColorButton::ColorButton(float size, ButtonState state, ColorButtonType type)
 	button.setFillColor(getColor());
 }
 
+ColorButtonType ColorButton::getColorButtonType() const
+{
+	return type;
+}
+
 ColorButton::ColorButton() {
 	int a = 1;
 }
@@ -13,7 +18,7 @@ ButtonClass ColorButton::getButtonClass() const {
 	return ButtonClass::color;
 }
 
-Color ColorButton::getColor()
+Color ColorButton::getColor() const
 {
 	switch (type)
 	{

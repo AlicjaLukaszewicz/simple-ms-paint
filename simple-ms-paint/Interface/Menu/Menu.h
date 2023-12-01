@@ -13,13 +13,11 @@ public:
 	Menu(float width, float height, Color color);
 	~Menu();
 
-	void drawTo(RenderWindow& window);
-
 	vector<Button*> getEnabledButtons() const;
-	void setOtherButtonsToDisabled(vector<Button*> buttons, const Button* clickedButton);
+
+	void drawTo(RenderWindow& window);
 
 	void onMouseHover(const Vector2f& mousePosition);
 	void onMouseClick(const Vector2f& mousePosition);
-	void handleButtonClick(const vector<Button*>& buttons, const Vector2f& mousePosition);
-	void handleButtonHover(const vector<Button*>& buttons, const Vector2f& mousePosition);
+	bool isMouseWithinSectionBounds(const MenuSection* section, const Vector2f& mousePosition) const;
 };

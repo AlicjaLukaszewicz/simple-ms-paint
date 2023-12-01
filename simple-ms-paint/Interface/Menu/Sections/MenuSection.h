@@ -19,6 +19,7 @@ public:
 
 	Vector2f getSize();
 	vector<Button*> getButtons();
+	RectangleShape getSection() const;
 
 	void setSize(float width, float height);
 	void setPosition(Vector2f position);
@@ -28,5 +29,8 @@ public:
 
 	virtual void positionButtons();
 	virtual void drawTo(RenderWindow& window);
+
 	virtual void onMouseHover(const Vector2f& mousePosition);
+	virtual void onMouseClick(const Vector2f& mousePosition);
+	void setOtherButtonsToDisabled(const Button* clickedButton);
 };

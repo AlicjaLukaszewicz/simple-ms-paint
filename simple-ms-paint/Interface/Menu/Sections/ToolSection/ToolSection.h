@@ -18,4 +18,6 @@ public:
 
 	void positionButtons() override;
 	void drawTo(RenderWindow& window) override;
+
+	void onMouseHover(const Vector2f& mousePosition) override;
 };

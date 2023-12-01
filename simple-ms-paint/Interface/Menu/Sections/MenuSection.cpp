@@ -26,6 +26,11 @@ vector<Button*> MenuSection::getButtons()
 	return buttons;
 }
 
+RectangleShape MenuSection::getSection() const
+{
+	return section;
+}
+
 void MenuSection::setSize(float width, float height)
 {
 	section.setSize(Vector2f(width, height));
@@ -51,6 +56,23 @@ Texture* MenuSection::loadTexture(const string& filename) {
 }
 
 void MenuSection::onMouseHover(const Vector2f& mousePosition) {
+}
+
+void MenuSection::onMouseClick(const Vector2f& mousePosition) {
+	for (auto& button : buttons) {
+		if (button->getButtonShape().getGlobalBounds().contains(mousePosition)) {
+			button->setState(ButtonState::enabled);
+			setOtherButtonsToDisabled(button);
+		}
+	}
+}
+
+void MenuSection::setOtherButtonsToDisabled(const Button* clickedButton) {
+	for (const auto& button : buttons) {
+		if (button != clickedButton) {
+			button->setState(ButtonState::disabled);
+		}
+	}
 }
 
 void MenuSection::positionButtons() {

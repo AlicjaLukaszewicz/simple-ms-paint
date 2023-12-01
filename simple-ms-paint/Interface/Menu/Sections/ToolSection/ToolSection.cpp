@@ -54,3 +54,9 @@ void ToolSection::drawTo(RenderWindow& window) {
 		button->drawTo(window);
 	}
 }
+
+void ToolSection::onMouseHover(const Vector2f& mousePosition) {
+	for (auto& button : buttons) {
+		button->setIsHovered(button->getButtonShape().getGlobalBounds().contains(mousePosition));
+	}
+}

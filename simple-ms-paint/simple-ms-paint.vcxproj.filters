@@ -48,6 +48,9 @@
     <ClCompile Include="Button\ToolButton\ToolButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Interface\Menu\Sections\ColorSection\CurrentColorDisplay\CurrentColorDisplay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button\Button.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Button\ToolButton\ToolButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\Menu\Sections\ColorSection\CurrentColorDisplay\CurrentColorDisplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
