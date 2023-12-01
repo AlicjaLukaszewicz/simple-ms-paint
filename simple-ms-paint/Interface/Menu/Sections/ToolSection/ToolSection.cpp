@@ -1,13 +1,11 @@
 #include "ToolSection.h"
 
-#include "../../../../Button/ColorButton/ColorButton.h"
 #include "../../../../Button/ToolButton/ToolButton.h"
 
 const int BUTTON_SIZE = 40;
 
 ToolSection::ToolSection(float width, float height, Vector2f position)
 	: MenuSection(width, height, position, {}) {
-	section.setFillColor(Color::Transparent);
 	loadTools();
 }
 
@@ -36,12 +34,12 @@ void ToolSection::loadTools() {
 }
 
 void ToolSection::positionButtons() {
-	float centerY = section.getPosition().y + section.getSize().y / 2.0f;
+	float centerY = (section.getSize().y - BUTTON_SIZE) / 2.0f;
 	size_t numButtons = buttons.size();
 
-	float horizontalSpacing = (section.getSize().x - BUTTON_SIZE) / (numButtons + 1);
+	float horizontalSpacing = (section.getSize().x - BUTTON_SIZE * numButtons) / (numButtons + 1);
 
-	Vector2f buttonPosition(horizontalSpacing, (section.getSize().y - BUTTON_SIZE) / 2.0f);
+	Vector2f buttonPosition(section.getPosition().x + horizontalSpacing, centerY);
 
 	for (auto& button : this->buttons) {
 		button->setPosition(buttonPosition);

@@ -1,7 +1,8 @@
 #include "ColorButton.h"
 
-ColorButton::ColorButton(float size, Texture* texture, ButtonState state, ColorButtonType type)
-	: Button(size, texture, state), type(type) {
+ColorButton::ColorButton(float size, ButtonState state, ColorButtonType type)
+	: Button(size, state), type(type) {
+	button.setFillColor(getColor());
 }
 
 ColorButton::ColorButton() {
@@ -18,6 +19,8 @@ Color ColorButton::getColor()
 	{
 	case ColorButtonType::red:
 		return Color::Red;
+	case ColorButtonType::magenta:
+		return Color::Magenta;
 	case ColorButtonType::yellow:
 		return Color::Yellow;
 	case ColorButtonType::green:
@@ -29,4 +32,8 @@ Color ColorButton::getColor()
 	default:
 		return Color::White;
 	}
+}
+
+void ColorButton::drawTo(RenderWindow& window) {
+	window.draw(button);
 }

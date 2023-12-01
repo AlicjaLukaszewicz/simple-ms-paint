@@ -15,22 +15,9 @@ enum class ButtonState {
 	enabled, disabled
 };
 
-enum class ToolButtonType {
-	pencil, bucket, eraser, colorpicker,
-};
-
-enum class ColorButtonType {
-	red,
-	yellow,
-	green,
-	blue,
-	black
-};
-
 class Button {
 protected:
 	RectangleShape button;
-	RectangleShape buttonTexture;
 
 	float size;
 	Vector2f position;
@@ -41,18 +28,19 @@ protected:
 
 public:
 	Button();
-	Button(float size, Texture* texture, ButtonState state);
+	Button(float size, ButtonState state);
 
 	void setState(ButtonState state);
 	void setIsHovered(bool isHovered);
-	void setPosition(Vector2f position);
+	void setButtonStyle();
+	virtual void setPosition(Vector2f position);
 
 	float getSize() const;
 	bool getIsHovered() const;
 	ButtonState getState() const;
 	virtual ButtonClass getButtonClass() const = 0;
 
-	void drawTo(RenderWindow& window);
+	virtual void drawTo(RenderWindow& window);
 	bool isMouseOver(Vector2f mousePosition);
 };
 #endif

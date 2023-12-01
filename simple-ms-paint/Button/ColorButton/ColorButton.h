@@ -2,6 +2,15 @@
 
 #include "../Button.h"
 
+enum class ColorButtonType {
+	black,
+	red,
+	magenta,
+	yellow,
+	green,
+	blue
+};
+
 class ColorButton : public Button {
 private:
 	ColorButtonType type;
@@ -9,6 +18,8 @@ private:
 
 public:
 	ColorButton();
-	ColorButton(float size, Texture* texture, ButtonState state, ColorButtonType type);
+	ColorButton(float size, ButtonState state, ColorButtonType type);
 	Color getColor();
+
+	void drawTo(RenderWindow& window) override;
 };

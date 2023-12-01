@@ -2,6 +2,7 @@
 #include <vector>
 #include "../../Button/Button.h"
 #include "Sections/ToolSection/ToolSection.h"
+#include "Sections/ColorSection/ColorSection.h"
 
 class Menu {
 private:

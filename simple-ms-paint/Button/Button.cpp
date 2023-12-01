@@ -1,19 +1,14 @@
 #include "Button.h"
 
-Button::Button(float size, Texture* texture, ButtonState state)
+Button::Button(float size, ButtonState state)
 	: state(state), isHovered(false) {
-	Texture* smoothTexture = texture;
-	smoothTexture->setSmooth(true);
-
 	button.setSize(Vector2f(size, size));
-
-	buttonTexture.setSize(Vector2f(size, size));
-	buttonTexture.setTexture(smoothTexture);
-
 	setPosition(position);
 }
 
 Button::Button() {
+	isHovered = false;
+	size = 0;
 	state = ButtonState::disabled;
 }
 
@@ -23,7 +18,6 @@ ButtonClass Button::getButtonClass() const {
 
 void Button::setPosition(Vector2f position) {
 	button.setPosition(position);
-	buttonTexture.setPosition(position);
 }
 
 void Button::setState(ButtonState state) {
@@ -43,6 +37,12 @@ float Button::getSize() const {
 }
 
 void Button::drawTo(RenderWindow& window) {
+	setButtonStyle();
+
+	window.draw(button);
+}
+
+void Button::setButtonStyle() {
 	button.setOutlineColor(Color(98, 162, 228));
 
 	if (state == ButtonState::enabled || isHovered) {
@@ -53,9 +53,6 @@ void Button::drawTo(RenderWindow& window) {
 		button.setFillColor(sf::Color(245, 246, 247));
 		button.setOutlineThickness(0);
 	}
-
-	window.draw(button);
-	window.draw(buttonTexture);
 }
 
 bool Button::isMouseOver(Vector2f mousePosition) {

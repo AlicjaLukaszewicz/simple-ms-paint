@@ -29,8 +29,7 @@ void Canvas::onMouseHold(Vector2f mousePosition, vector<Button*> enabledButtons)
 		// return;
 	}
 
-	//Color color = colorButton->getColor();
-	Color color = Color::Black;
+	Color color = colorButton->getColor();
 
 	if (toolButton->getType() == ToolButtonType::pencil) {
 		handlePencilAction(mousePosition, color);

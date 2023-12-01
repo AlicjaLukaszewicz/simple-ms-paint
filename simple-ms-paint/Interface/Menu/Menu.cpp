@@ -1,13 +1,20 @@
 #include "Menu.h"
 
 Menu::Menu(float width, float height, Color color) {
-	ToolSection* toolsSection = new ToolSection(width / 3, height, Vector2f(0, 0));
+	float colorSectionWidth = width / 3;
+	float toolSectionWidth = 2 * width / 3;
+
+	ToolSection* toolsSection =
+		new ToolSection(toolSectionWidth, height, Vector2f(0, 0));
+	ColorSection* colorsSection =
+		new ColorSection(colorSectionWidth, height, Vector2f(toolSectionWidth, 0));
 
 	menu.setSize(Vector2f(width, height));
 	menu.setPosition(0, 0);
 	menu.setFillColor(color);
 
 	sections.emplace_back(toolsSection);
+	sections.emplace_back(colorsSection);
 }
 
 Menu::~Menu()

@@ -4,6 +4,7 @@ const string FILE_PATH = "Resources/";
 
 MenuSection::MenuSection(float width, float height, Vector2f position, vector<Button*> buttons)
 	: buttons(buttons) {
+	section.setFillColor(Color::Transparent);
 	section.setSize(Vector2f(width, height));
 	section.setPosition(position);
 }
