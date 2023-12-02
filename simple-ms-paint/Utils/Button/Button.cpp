@@ -46,11 +46,11 @@ void Button::setButtonStyle() {
 	button.setOutlineColor(Color(98, 162, 228));
 
 	if (state == ButtonState::enabled || isHovered) {
-		button.setFillColor(sf::Color(201, 224, 247));
+		button.setFillColor(Color(201, 224, 247));
 		button.setOutlineThickness(1);
 	}
 	else {
-		button.setFillColor(sf::Color(245, 246, 247));
+		button.setFillColor(Color(245, 246, 247));
 		button.setOutlineThickness(0);
 	}
 }

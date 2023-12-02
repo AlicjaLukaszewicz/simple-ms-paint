@@ -17,10 +17,10 @@ public:
 
 	void run();
 
-	void processEvents(bool& isMouseDown);
-	void handleMouseMoved(const Event& event, bool& isMouseDown);
-	void handleMouseButtonPressed(const Event& event, bool& isMouseDown);
-	void handleMouseButtonReleased(const Event& event, bool& isMouseDown);
+	void processEvents();
+	void handleMouseMoved(const Event& event);
+	void handleMouseButtonPressed(const Event& event);
+	void handleMouseButtonReleased(const Event& event);
 
 	void render();
 };

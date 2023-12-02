@@ -16,20 +16,33 @@ Interface::~Interface()
 	delete canvas;
 }
 
+Canvas* Interface::getCanvas()
+{
+	return canvas;
+}
+
 void Interface::draw(RenderWindow& window) {
 	menu->drawTo(window);
 	canvas->drawTo(window);
 }
 
-void Interface::onMouseHover(RenderWindow& window, Vector2f mousePosition) {
+void Interface::onMouseHover(RenderWindow& window) {
+	Vector2f mousePosition = window.mapPixelToCoords(Mouse::getPosition(window));
 	menu->onMouseHover(mousePosition);
 }
 
-void Interface::onMouseClick(RenderWindow& window, Vector2f mousePosition) {
-	menu->onMouseClick(mousePosition);
+void Interface::onMouseClick(RenderWindow& window) {
+	Vector2f mousePosition = window.mapPixelToCoords(Mouse::getPosition(window));
+	if (menu->contains(mousePosition)) {
+		menu->onMouseClick(mousePosition);
+	}
+	else if (canvas->contains(mousePosition)) {
+		vector<Button*> enabledButtons = menu->getEnabledButtons();
+		canvas->onMouseClick(window, enabledButtons);
+	}
 }
 
-void Interface::onMouseHold(RenderWindow& window, Vector2f mousePosition) {
+void Interface::onMouseHold(RenderWindow& window) {
 	vector<Button*> enabledButtons = menu->getEnabledButtons();
-	canvas->onMouseHold(mousePosition, enabledButtons);
+	canvas->onMouseHold(window, enabledButtons);
 }

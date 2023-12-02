@@ -1,6 +1,6 @@
 #include "ColorSection.h"
 
-#include "../../../../Button/ColorButton/ColorButton.h"
+#include "../../../../Utils/Button/ColorButton/ColorButton.h"
 
 const int BUTTON_SIZE = 20;
 const int NUMBER_OF_ROWS = 2;

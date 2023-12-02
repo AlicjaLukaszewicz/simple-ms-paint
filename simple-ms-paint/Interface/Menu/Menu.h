@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include "../../Button/Button.h"
+#include "../../Utils/Button/Button.h"
 #include "Sections/ToolSection/ToolSection.h"
 #include "Sections/ColorSection/ColorSection.h"
 
@@ -12,6 +12,8 @@ private:
 public:
 	Menu(float width, float height, Color color);
 	~Menu();
+
+	bool contains(Vector2f point) const;
 
 	vector<Button*> getEnabledButtons() const;
 

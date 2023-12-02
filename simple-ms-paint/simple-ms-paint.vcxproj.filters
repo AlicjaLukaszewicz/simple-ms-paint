@@ -18,7 +18,7 @@
     <ClCompile Include="simple-ms-paint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Button\Button.cpp">
+    <ClCompile Include="Utils\Button\Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Interface\Interface.cpp">
@@ -42,18 +42,30 @@
     <ClCompile Include="Paint\Paint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Button\ColorButton\ColorButton.cpp">
+    <ClCompile Include="Utils\Button\ColorButton\ColorButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Button\ToolButton\ToolButton.cpp">
+    <ClCompile Include="Utils\Button\ToolButton\ToolButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Interface\Menu\Sections\ColorSection\CurrentColorDisplay\CurrentColorDisplay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Utils\Tool\Tool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Tool\PencilTool\PencilTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Tool\EraserTool\EraserTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Tool\FillTool\FillTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Button\Button.h">
+    <ClInclude Include="Utils\Button\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Interface\Interface.h">
@@ -80,13 +92,25 @@
     <ClInclude Include="Paint\Paint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Button\ColorButton\ColorButton.h">
+    <ClInclude Include="Utils\Button\ColorButton\ColorButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Button\ToolButton\ToolButton.h">
+    <ClInclude Include="Utils\Button\ToolButton\ToolButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Interface\Menu\Sections\ColorSection\CurrentColorDisplay\CurrentColorDisplay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Tool\Tool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Tool\PencilTool\PencilTool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Tool\EraserTool\EraserTool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Tool\FillTool\FillTool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

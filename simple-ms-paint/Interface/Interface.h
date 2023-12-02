@@ -18,9 +18,11 @@ public:
 	Interface(RenderWindow& window);
 	~Interface();
 
+	Canvas* getCanvas();
+
 	void draw(RenderWindow& window);
 
-	void onMouseHover(RenderWindow& window, Vector2f mousePosition);
-	void onMouseClick(RenderWindow& window, Vector2f mousePosition);
-	void onMouseHold(RenderWindow& window, Vector2f mousePosition);
+	void onMouseHover(RenderWindow& window);
+	void onMouseClick(RenderWindow& window);
+	void onMouseHold(RenderWindow& window);
 };

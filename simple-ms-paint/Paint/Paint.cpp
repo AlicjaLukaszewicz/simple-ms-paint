@@ -13,12 +13,12 @@ Paint::~Paint()
 
 void Paint::run() {
 	while (window.isOpen()) {
-		processEvents(isMouseDown);
+		processEvents();
 		render();
 	}
 }
 
-void Paint::processEvents(bool& isMouseDown) {
+void Paint::processEvents() {
 	Event event;
 
 	while (window.pollEvent(event)) {
@@ -27,15 +27,15 @@ void Paint::processEvents(bool& isMouseDown) {
 			window.close();
 			break;
 		case Event::MouseMoved:
-			handleMouseMoved(event, isMouseDown);
+			handleMouseMoved(event);
 			break;
 
 		case Event::MouseButtonPressed:
-			handleMouseButtonPressed(event, isMouseDown);
+			handleMouseButtonPressed(event);
 			break;
 
 		case Event::MouseButtonReleased:
-			handleMouseButtonReleased(event, isMouseDown);
+			handleMouseButtonReleased(event);
 			break;
 		default:
 			break;
@@ -43,26 +43,25 @@ void Paint::processEvents(bool& isMouseDown) {
 	}
 }
 
-void Paint::handleMouseMoved(const Event& event, bool& isMouseDown) {
-	Vector2f mousePosition = window.mapPixelToCoords(Mouse::getPosition(window));
-
+void Paint::handleMouseMoved(const Event& event) {
 	if (isMouseDown) {
-		interface->onMouseHold(window, mousePosition);
+		interface->onMouseHold(window);
 	}
 	else {
-		interface->onMouseHover(window, mousePosition);
+		interface->onMouseHover(window);
 	}
 }
 
-void Paint::handleMouseButtonPressed(const Event& event, bool& isMouseDown) {
+void Paint::handleMouseButtonPressed(const Event& event) {
+	Vector2i mousePosition = Mouse::getPosition(window);
 	if (event.mouseButton.button == Mouse::Left) {
-		Vector2f mousePosition = window.mapPixelToCoords(Mouse::getPosition(window));
-		interface->onMouseClick(window, mousePosition);
+		interface->onMouseClick(window);
 		isMouseDown = true;
+		interface->getCanvas()->setPreviousMousePosition(mousePosition);
 	}
 }
 
-void Paint::handleMouseButtonReleased(const Event& event, bool& isMouseDown) {
+void Paint::handleMouseButtonReleased(const Event& event) {
 	if (event.mouseButton.button == Mouse::Left) {
 		isMouseDown = false;
 	}

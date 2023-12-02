@@ -24,6 +24,11 @@ Menu::~Menu()
 	}
 }
 
+bool Menu::contains(Vector2f point) const
+{
+	return menu.getGlobalBounds().contains(point);
+}
+
 void Menu::drawTo(RenderWindow& window) {
 	window.draw(menu);
 

@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "../../../../Button/Button.h"
+#include "../../../../Utils/Button/Button.h"
 #include "../MenuSection.h"
 #include "CurrentColorDisplay/CurrentColorDisplay.h"
 
