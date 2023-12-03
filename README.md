@@ -53,9 +53,6 @@ The bucket fill feature is implemented using the "flood fill algorithm" (Depth-F
 ## Dependencies
 ```SFML``` - Simple and Fast Multimedia Library
 
-## Contributing
-Contributions are welcome! Feel free to submit bug reports, feature requests, or pull requests.
-
 ## Credit
 Icons made by [Freepik](https://www.freepik.com) from [Flaticon](https://www.flaticon.com/)
 
