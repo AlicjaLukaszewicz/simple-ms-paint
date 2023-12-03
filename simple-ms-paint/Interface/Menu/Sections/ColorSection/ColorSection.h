@@ -6,15 +6,18 @@
 #include "../../../../Utils/Button/Button.h"
 #include "../MenuSection.h"
 #include "CurrentColorDisplay/CurrentColorDisplay.h"
+#include "../../../../Observer/Observer.h"
 
 using namespace sf;
 using namespace std;
 
-class ColorSection : public MenuSection {
+class ColorSection : public MenuSection, public Observer {
 private:
 	CurrentColorDisplay* currentColorDisplay;
 
 	void loadColors();
+
+	void updateColor(const Color& color) override;
 
 	float calculateVerticalSpacing();
 	float calculateHorizontalSpacing(float currentColorDisplaySize, int buttonsPerRow);

@@ -144,10 +144,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Utils\Tool\EraserTool\EraserTool.cpp" />
-    <ClCompile Include="Utils\Tool\FillTool\FillTool.cpp" />
-    <ClCompile Include="Utils\Tool\PencilTool\PencilTool.cpp" />
-    <ClCompile Include="Utils\Tool\Tool.cpp" />
+    <ClCompile Include="Utils\Tool\ColorPicker\ColorPicker.cpp" />
+    <ClCompile Include="Utils\Tool\Eraser\Eraser.cpp" />
+    <ClCompile Include="Utils\Tool\Fill\Fill.cpp" />
+    <ClCompile Include="Utils\Tool\Pencil\Pencil.cpp" />
     <ClCompile Include="Utils\Button\Button.cpp" />
     <ClCompile Include="Utils\Button\ColorButton\ColorButton.cpp" />
     <ClCompile Include="Utils\Button\ToolButton\ToolButton.cpp" />
@@ -162,10 +162,11 @@
     <ClCompile Include="simple-ms-paint.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Utils\Tool\EraserTool\EraserTool.h" />
-    <ClInclude Include="Utils\Tool\FillTool\FillTool.h" />
-    <ClInclude Include="Utils\Tool\PencilTool\PencilTool.h" />
-    <ClInclude Include="Utils\Tool\Tool.h" />
+    <ClInclude Include="Observer\Observer.h" />
+    <ClInclude Include="Utils\Tool\ColorPicker\ColorPicker.h" />
+    <ClInclude Include="Utils\Tool\Eraser\Eraser.h" />
+    <ClInclude Include="Utils\Tool\Fill\Fill.h" />
+    <ClInclude Include="Utils\Tool\Pencil\Pencil.h" />
     <ClInclude Include="Utils\Button\Button.h" />
     <ClInclude Include="Utils\Button\ColorButton\ColorButton.h" />
     <ClInclude Include="Utils\Button\ToolButton\ToolButton.h" />

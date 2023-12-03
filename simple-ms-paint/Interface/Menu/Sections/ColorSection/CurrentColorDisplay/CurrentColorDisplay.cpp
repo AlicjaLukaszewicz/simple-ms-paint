@@ -23,7 +23,7 @@ void CurrentColorDisplay::setPosition(Vector2f position)
 	display.setPosition(position);
 }
 
-void CurrentColorDisplay::setColor(Color color)
+void CurrentColorDisplay::updateColor(Color color)
 {
 	display.setFillColor(color);
 }

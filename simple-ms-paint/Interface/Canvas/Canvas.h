@@ -19,13 +19,14 @@ public:
 	VertexArray* getPixels() const;
 	Vector2f getPosition() const;
 	Vector2f getSize() const;
+	Color getFillColor() const;
 
 	void setPreviousMousePosition(Vector2i previousMousePosition);
 
-	int calculateIndex(Vector2f mousePosition, float i, float j) const;
-	bool isModifiedPositionOnCanvas(Vector2f mousePosition, float i, float j) const;
-	vector<Vector2f> calculateHypotenusePositions(
-		const Vector2f& pointA, const Vector2f& pointB, float stepSize);
+	int calculatePixelIndex(Vector2f mousePosition) const;
+	bool isPositionOnCanvas(Vector2f mousePosition) const;
+
+	vector<Vector2f> getAllPointsOnLine(Vector2f pointA, Vector2f pointB);
 
 	bool isMouseOnCanvas(Vector2f mousePosition) const;
 
@@ -34,7 +35,6 @@ private:
 	Vector2f canvasSize;
 	Vector2f canvasPosition;
 	Vector2i previousMousePosition;
-	float pixelSize;
 	VertexArray* pixels;
 
 	ColorButton* findColorButton(const vector<Button*>& buttons) const;

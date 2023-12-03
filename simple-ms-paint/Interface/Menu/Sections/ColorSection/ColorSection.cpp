@@ -1,6 +1,7 @@
 #include "ColorSection.h"
 
 #include "../../../../Utils/Button/ColorButton/ColorButton.h"
+#include "../../../../Utils/Tool/ColorPicker/ColorPicker.h"
 
 const int BUTTON_SIZE = 20;
 const int NUMBER_OF_ROWS = 2;
@@ -9,6 +10,8 @@ ColorSection::ColorSection(float width, float height, Vector2f position)
 	: MenuSection(width, height, position, {}) {
 	currentColorDisplay = new CurrentColorDisplay();
 	loadColors();
+
+	ColorPicker::getInstance().addObserver(this);
 }
 
 void ColorSection::loadColors() {
@@ -37,6 +40,22 @@ void ColorSection::loadColors() {
 	buttons.emplace_back(blueButton);
 
 	positionButtons();
+}
+
+void ColorSection::updateColor(const Color& color)
+{
+	cout << "5: Updating colors~!" << endl;
+	for (auto& button : buttons) {
+		ColorButton* colorButton = static_cast<ColorButton*>(button);
+		if (colorButton->getColor() == color)
+		{
+			colorButton->setState(ButtonState::enabled);
+		}
+		else {
+			colorButton->setState(ButtonState::disabled);
+		}
+	}
+	currentColorDisplay->updateColor(color);
 }
 
 void ColorSection::positionButtons() {
@@ -107,7 +126,7 @@ void ColorSection::onMouseClick(const Vector2f& mousePosition)
 			color = colorButton->getColor();
 		}
 	}
-	currentColorDisplay->setColor(color);
+	currentColorDisplay->updateColor(color);
 }
 
 Color ColorSection::getPickedColor() const {

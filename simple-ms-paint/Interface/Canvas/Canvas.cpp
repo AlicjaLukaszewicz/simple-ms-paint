@@ -1,14 +1,12 @@
 #include "Canvas.h"
-#include "../../Utils/Tool/PencilTool/PencilTool.h"
-#include "../../Utils/Tool/EraserTool/EraserTool.h"
-#include "../../Utils/Tool/FillTool/FillTool.h"
-
-const float PIXEL_SIZE = 5.0f;
+#include "../../Utils/Tool/ColorPicker/ColorPicker.h"
+#include "../../Utils/Tool/Pencil/Pencil.h"
+#include "../../Utils/Tool/Eraser/Eraser.h"
+#include "../../Utils/Tool/Fill/Fill.h"
 
 Canvas::Canvas(float width, float height, Vector2f position, float padding)
-	: canvasPosition(position.x + padding, position.y + padding),
-	pixelSize(PIXEL_SIZE),
-	pixels(nullptr) {
+	: pixels(nullptr) {
+	canvasPosition = { position.x + padding, position.y + padding };
 	canvasSize = { width - 2 * padding, height - 2 * padding };
 	previousMousePosition = { 0, 0 };
 
@@ -16,7 +14,32 @@ Canvas::Canvas(float width, float height, Vector2f position, float padding)
 	canvas.setPosition(canvasPosition);
 	canvas.setFillColor(Color::White);
 
-	initializePixels(width - 2 * padding, height - 2 * padding);
+	initializePixels(canvasSize.x, canvasSize.y);
+}
+
+Vector2i Canvas::getPreviousMousePosition() const {
+	return previousMousePosition;
+}
+
+VertexArray* Canvas::getPixels() const {
+	return pixels;
+}
+
+Vector2f Canvas::getPosition() const {
+	return canvasPosition;
+}
+
+Vector2f Canvas::getSize() const {
+	return canvasSize;
+}
+
+Color Canvas::getFillColor() const
+{
+	return canvas.getFillColor();
+}
+
+void Canvas::setPreviousMousePosition(Vector2i previousMousePosition) {
+	this->previousMousePosition = previousMousePosition;
 }
 
 void Canvas::drawTo(RenderWindow& window) {
@@ -28,19 +51,17 @@ void Canvas::onMouseHold(RenderWindow& window, vector<Button*> enabledButtons) {
 	ColorButton* colorButton = findColorButton(enabledButtons);
 	ToolButton* toolButton = findToolButton(enabledButtons);
 
-	if (colorButton == nullptr || toolButton == nullptr) {
+	if (!colorButton || !toolButton) {
 		return;
 	}
 
 	Color color = colorButton->getColor();
 
 	if (toolButton->getType() == ToolButtonType::pencil) {
-		PencilTool pencilTool;
-		pencilTool.applyTool(*this, window, color);
+		Pencil::draw(*this, window, color);
 	}
 	else if (toolButton->getType() == ToolButtonType::eraser) {
-		EraserTool eraserTool;
-		eraserTool.applyTool(*this, window, canvas.getFillColor());
+		Eraser::erase(*this, window);
 	}
 }
 
@@ -48,26 +69,28 @@ void Canvas::onMouseClick(RenderWindow& window, vector<Button*> enabledButtons) 
 	ColorButton* colorButton = findColorButton(enabledButtons);
 	ToolButton* toolButton = findToolButton(enabledButtons);
 
-	if (colorButton == nullptr || toolButton == nullptr) {
+	if (!colorButton || !toolButton) {
 		return;
 	}
 
 	Color color = colorButton->getColor();
 
 	if (toolButton->getType() == ToolButtonType::bucket) {
-		FillTool fillTool;
-		fillTool.applyTool(*this, window, color);
+		Fill::fill(*this, window, color);
+	}
+	else if (toolButton->getType() == ToolButtonType::colorpicker) {
+		ColorPicker::pick(*this, window);
 	}
 }
 
 void Canvas::initializePixels(float width, float height) {
-	pixels = new VertexArray(Points, int(width * height));
+	pixels = new VertexArray(Points, static_cast<unsigned int>(width * height));
 
 	for (int x = 0; x < width; ++x) {
 		for (int y = 0; y < height; ++y) {
 			Vector2f pixelPosition = canvasPosition + Vector2f(x, y);
-			(*pixels)[x + y * width].position = pixelPosition;
-			(*pixels)[x + y * width].color = Color::Transparent;
+			(*pixels)[x + y * static_cast<int>(width)].position = pixelPosition;
+			(*pixels)[x + y * static_cast<int>(width)].color = Color::White;
 		}
 	}
 }
@@ -90,18 +113,16 @@ ToolButton* Canvas::findToolButton(const vector<Button*>& buttons) const {
 	return nullptr;
 }
 
-vector<Vector2f> Canvas::calculateHypotenusePositions(const Vector2f& pointA, const Vector2f& pointB, float stepSize) {
+vector<Vector2f> Canvas::getAllPointsOnLine(Vector2f pointA, Vector2f pointB) {
 	vector<Vector2f> positions;
 
-	float distance = sqrt((pointB.x - pointA.x) * (pointB.x - pointA.x) +
-		(pointB.y - pointA.y) * (pointB.y - pointA.y));
+	float distance = sqrt(pow(pointB.x - pointA.x, 2) + pow(pointB.y - pointA.y, 2));
+	int numberOfSteps = static_cast<int>(distance);
 
-	int numSteps = static_cast<int>(distance);
+	float stepX = (pointB.x - pointA.x) / numberOfSteps;
+	float stepY = (pointB.y - pointA.y) / numberOfSteps;
 
-	float stepX = (pointB.x - pointA.x) / numSteps;
-	float stepY = (pointB.y - pointA.y) / numSteps;
-
-	for (int i = 0; i <= numSteps; ++i) {
+	for (int i = 0; i <= numberOfSteps; ++i) {
 		float x = pointA.x + i * stepX;
 		float y = pointA.y + i * stepY;
 		positions.push_back(Vector2f(x, y));
@@ -111,59 +132,34 @@ vector<Vector2f> Canvas::calculateHypotenusePositions(const Vector2f& pointA, co
 }
 
 bool Canvas::isMouseOnCanvas(Vector2f mousePosition) const {
-	FloatRect canvasBounds = canvas.getGlobalBounds();
-	return canvasBounds.contains(mousePosition);
+	return canvas.getGlobalBounds().contains(mousePosition);
 }
 
-bool Canvas::isModifiedPositionOnCanvas(Vector2f mousePosition, float i, float j) const {
-	return contains({ mousePosition.x + i, mousePosition.y + j });
+bool Canvas::isPositionOnCanvas(Vector2f mousePosition) const {
+	return contains({ mousePosition.x, mousePosition.y });
 }
 
-int Canvas::calculateIndex(Vector2f mousePosition, float i, float j) const {
+int Canvas::calculatePixelIndex(Vector2f mousePosition) const {
 	Vector2i pixelPosition = Vector2i(mousePosition);
 	size_t index;
 
-	for (int x = 0; x < canvasSize.x; ++x) {
-		for (int y = 0; y < canvasSize.y; ++y) {
+	for (int x = 0; x < static_cast<int>(canvasSize.x); ++x) {
+		for (int y = 0; y < static_cast<int>(canvasSize.y); ++y) {
 			Vector2i currentPixelPosition = Vector2i(x, y) + Vector2i(canvasPosition);
 			if (pixelPosition == currentPixelPosition) {
-				index = (x + y * canvasSize.x);
-				return index;
+				index = (x + y * static_cast<int>(canvasSize.x));
+				return static_cast<int>(index);
 			}
 		}
 	}
+
+	return -1;
 }
 
 Canvas::~Canvas() {
 	delete pixels;
 }
 
-bool Canvas::contains(Vector2f point) const
-{
+bool Canvas::contains(Vector2f point) const {
 	return canvas.getGlobalBounds().contains(point);
-}
-
-Vector2i Canvas::getPreviousMousePosition() const
-{
-	return previousMousePosition;
-}
-
-VertexArray* Canvas::getPixels() const
-{
-	return pixels;
-}
-
-Vector2f Canvas::getPosition() const
-{
-	return canvasPosition;
-}
-
-Vector2f Canvas::getSize() const
-{
-	return canvasSize;
-}
-
-void Canvas::setPreviousMousePosition(Vector2i previousMousePosition)
-{
-	this->previousMousePosition = previousMousePosition;
 }

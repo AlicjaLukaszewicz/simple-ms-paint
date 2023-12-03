@@ -19,7 +19,7 @@ public:
 
 	void setSize(float size);
 	void setPosition(Vector2f position);
-	void setColor(Color color);
+	void updateColor(Color color);
 
 	void drawTo(RenderWindow& window);
 };

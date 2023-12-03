@@ -51,16 +51,16 @@
     <ClCompile Include="Interface\Menu\Sections\ColorSection\CurrentColorDisplay\CurrentColorDisplay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utils\Tool\Tool.cpp">
+    <ClCompile Include="Utils\Tool\Pencil\Pencil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utils\Tool\PencilTool\PencilTool.cpp">
+    <ClCompile Include="Utils\Tool\Eraser\Eraser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utils\Tool\EraserTool\EraserTool.cpp">
+    <ClCompile Include="Utils\Tool\Fill\Fill.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utils\Tool\FillTool\FillTool.cpp">
+    <ClCompile Include="Utils\Tool\ColorPicker\ColorPicker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -101,16 +101,19 @@
     <ClInclude Include="Interface\Menu\Sections\ColorSection\CurrentColorDisplay\CurrentColorDisplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\Tool\Tool.h">
+    <ClInclude Include="Utils\Tool\Pencil\Pencil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\Tool\PencilTool\PencilTool.h">
+    <ClInclude Include="Utils\Tool\Eraser\Eraser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\Tool\EraserTool\EraserTool.h">
+    <ClInclude Include="Utils\Tool\Fill\Fill.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\Tool\FillTool\FillTool.h">
+    <ClInclude Include="Utils\Tool\ColorPicker\ColorPicker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer\Observer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
