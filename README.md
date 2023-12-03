@@ -12,7 +12,7 @@
 
 ## Description
 
-<img align="right" width="380" src="https://github.com/AlicjaLukaszewicz/simple-ms-paint/assets/134921001/3b12e48d-d5dd-45d4-8e44-7bb3edb339b8">
+<img align="right" width="440" src="https://github.com/AlicjaLukaszewicz/simple-ms-paint/assets/134921001/3b12e48d-d5dd-45d4-8e44-7bb3edb339b8">
 
 MS Paint Clone is a desktop application written in C++ using the SFML graphic library. The project aims to replicate basic paint features found in Microsoft Paint while providing a customizable and extensible environment for future development.
 
